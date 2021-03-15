@@ -1,0 +1,251 @@
+
+using System;
+
+interface IRadioPlayer 
+{ void switchh(bool on); 
+ void retune(double frequency); 
+ void setVolume(int loudness); 
+ void changeChannel(); }
+
+
+interface IMusicPlayer
+{
+ 
+ 
+ void switchh(bool on); 
+void play(bool on); 
+ void setVolume(int loudness); 
+ void playNext(); 
+ void playPrevious();
+
+}
+
+
+
+class RadioPlayer : IRadioPlayer
+{
+    /*
+    interface IRadioPlayer 
+{ void switchh(bool on); 
+ void retune(double frequency); 
+ void setVolume(int loudness); 
+ void changeChannel(); }
+    */
+  public void switchh(bool on) 
+  {
+
+    Console.WriteLine(" intputed value : {0}",on);
+  }
+  public void retune(double frequency) 
+  {
+  
+    Console.WriteLine("2");
+  }
+  public void setVolume(int loudness) 
+  {
+    
+    Console.WriteLine("3");
+  }
+  public void changeChannel() 
+  {
+ 
+    Console.WriteLine("4");
+  }
+ 
+  
+}
+
+class MusicPlayer : IMusicPlayer
+{
+  public void switchh(bool on) 
+  {
+
+    Console.WriteLine("11");
+  }
+  public void play(bool on) 
+  {
+  
+    Console.WriteLine("12");
+  }
+  public void setVolume(int loudness) 
+  {
+    
+    Console.WriteLine("13");
+  }
+  public void playNext() 
+  {
+ 
+    Console.WriteLine("14");
+  }
+  public void playPrevious() 
+  {
+  
+    Console.WriteLine("15");
+  }
+  
+}
+
+
+
+
+
+
+class MusicFile
+{
+     public string title {get; set;}
+    public string artist { get; set; }
+    public string YearOfRelease { get; set; }
+    public int durationInSeconds {get; set;}
+
+    
+    
+    public MusicFile()
+    {
+    
+        
+    }
+    public MusicFile(string title1,string artist1,string YearOfRelease1,int durationInSeconds1)
+    {
+        title=title1;
+        artist=artist1;
+        YearOfRelease=YearOfRelease1;
+        durationInSeconds=durationInSeconds1;
+    }
+    
+    public void changeTitle(string tytle)
+    {
+        
+    }
+    
+}
+
+
+class Phone
+{
+
+ MusicFile[] MusicFile = new MusicFile[500];
+     public static int aa = -1;
+
+ public void addMusic(MusicFile Music)
+ {
+if(aa < MusicFile.Length)
+{
+ aa = aa + 1;
+    MusicFile[aa] = new MusicFile();
+    MusicFile[aa].title = Music.title;
+    MusicFile[aa].artist = Music.artist;
+    MusicFile[aa].YearOfRelease = Music.YearOfRelease;
+    MusicFile[aa].durationInSeconds = Music.durationInSeconds;
+
+
+
+/*
+title=title1;
+        artist=artist1;
+        YearOfRelease=YearOfRelease1;
+        durationInSeconds=durationInSeconds1;
+*/
+
+
+
+
+}
+else
+{
+  Console.WriteLine("\n sorry can not add a new Music due to storage limitation !! \n ");
+}
+
+
+ }
+
+
+public void  PrintMusicDetails()
+{
+Console.WriteLine("showing all the Music of this  phone: \n");
+  for(int i=0;i<MusicFile.Length;i++)
+  {
+    try{
+      if(MusicFile[i].durationInSeconds>0)
+      {
+   Console.WriteLine($"..............Music place no : {i}  ................");
+    Console.WriteLine(" Music Title: {0}",this.MusicFile[i].title);
+    Console.WriteLine(" Music Artist: {0}",MusicFile[i].artist);
+    Console.WriteLine(" Music YearOfRelease : {0}",MusicFile[i].YearOfRelease);
+    Console.WriteLine(" Music durationInSeconds : {0} seconds ",MusicFile[i].durationInSeconds );
+
+      }
+ 
+    
+  
+    
+    }catch(Exception )
+    {
+      
+    }
+
+  }
+
+}
+
+
+
+
+
+public void changeTitle(string title)
+{
+
+
+Console.WriteLine("\n after changing music title to ->## {0} ",title );
+for(int j=0;j<MusicFile.Length;j++)
+{
+  try{
+if (MusicFile[j].title == title )
+{
+
+ Console.WriteLine(" give the new title :\n");
+ string newTitle = Console.ReadLine();
+ MusicFile[j].title = newTitle;
+ 
+}
+    }catch(Exception )
+    {
+      //Console.WriteLine("can't change this title ......." );
+      
+    }
+}
+
+
+
+
+
+}
+
+}
+
+
+
+ class  Program 
+{
+  static void Main(string[] args) 
+  {
+    
+    MusicPlayer p = new MusicPlayer();
+    p.playPrevious();
+    RadioPlayer R = new RadioPlayer();
+    bool b = false;
+    R.switchh(b);
+
+
+    MusicFile M1 = new MusicFile("alo alo tumai kokhono khoje pai ni "," Tahsan ", " 2016",300);
+       MusicFile M2 = new MusicFile("BRISTY "," Tupo ", " 2016",200);
+    Phone ipod = new Phone();
+    ipod.addMusic(M1);
+    ipod.addMusic(M2);
+     ipod.PrintMusicDetails();
+    ipod.changeTitle(M1.title);
+    ipod.PrintMusicDetails();
+
+
+    
+  }
+}
